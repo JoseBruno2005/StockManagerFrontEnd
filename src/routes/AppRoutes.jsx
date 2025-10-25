@@ -7,6 +7,9 @@ import PrivateRoute from "./PrivateRoutes";
 import ManagerSupplier from "../pages/Supplier/ManageSupplier";
 import UpdateSupplier from "../pages/Supplier/UpdateSupplier";
 import CreateSupplier from "../pages/Supplier/CreateSupplier";
+import ManagerItem from "../pages/Item/ManagerItem";
+import UpdateItem from "../pages/Item/UpdateItem";
+import CreateItem from "../pages/Item/CreateItem";
 
 
 export default function AppRoutes() {
@@ -61,6 +64,33 @@ export default function AppRoutes() {
                 element={
                     <PrivateRoute>
                         <CreateSupplier />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path="/manager/item"
+                element={
+                    <PrivateRoute>
+                        <ManagerItem />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path="/update/item/:id"
+                element={
+                    <PrivateRoute>
+                        <UpdateItem />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path="/create/item"
+                element={
+                    <PrivateRoute>
+                        <CreateItem />
                     </PrivateRoute>
                 }
             />
