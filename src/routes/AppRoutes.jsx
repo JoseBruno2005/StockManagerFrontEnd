@@ -4,25 +4,28 @@ import Login from "../pages/auth/LoginPage";
 import { useAuth } from "../hooks/UseAuth";
 import Home from "../pages/home/Home";
 import PrivateRoute from "./PrivateRoutes";
+import ManagerSupplier from "../pages/Supplier/ManageSupplier";
+import UpdateSupplier from "../pages/Supplier/UpdateSupplier";
+import CreateSupplier from "../pages/Supplier/CreateSupplier";
 
 
-export default function AppRoutes(){
+export default function AppRoutes() {
 
-    const {isAuthenticated} = useAuth();
+    const { isAuthenticated } = useAuth();
 
-    return(
+    return (
         <Routes>
             <Route
                 path="/register"
                 element={
-                    isAuthenticated ? <Navigate  to="/home"/> : <Register/>
+                    isAuthenticated ? <Navigate to="/home" /> : <Register />
                 }
             />
 
             <Route
                 path="/login"
                 element={
-                    isAuthenticated ? <Navigate  to="/home"/> : <Login/>
+                    isAuthenticated ? <Navigate to="/home" /> : <Login />
                 }
             />
 
@@ -30,12 +33,39 @@ export default function AppRoutes(){
                 path="/home"
                 element={
                     <PrivateRoute>
-                        <Home/>
+                        <Home />
                     </PrivateRoute>
                 }
             />
 
-            <Route path="*" element={<Navigate to="/login"/>} />
+            <Route
+                path="/manager/supplier"
+                element={
+                    <PrivateRoute>
+                        <ManagerSupplier />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path="/update/supplier"
+                element={
+                    <PrivateRoute>
+                        <UpdateSupplier />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path="/create/supplier"
+                element={
+                    <PrivateRoute>
+                        <CreateSupplier />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
     )
 }
