@@ -25,7 +25,7 @@ export default function CreateItem() {
 
     return (
         <div>
-            <h1>Cadastre-se</h1>
+            <h1>Criar Item</h1>
 
             {successMessage && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-green-50/95 backdrop-blur-sm">
@@ -141,7 +141,7 @@ export default function CreateItem() {
                         <button
                             type="submit"
                         >
-                            Cadastrar-se
+                            Criar Item
                         </button>
                     </Form> 
                 )}

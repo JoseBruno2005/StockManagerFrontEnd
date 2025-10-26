@@ -10,6 +10,8 @@ import CreateSupplier from "../pages/Supplier/CreateSupplier";
 import ManagerItem from "../pages/Item/ManagerItem";
 import UpdateItem from "../pages/Item/UpdateItem";
 import CreateItem from "../pages/Item/CreateItem";
+import CreateTransaction from "../pages/transaction/CreateTransaction";
+import ManagerReport from "../pages/report/ManagerReport";
 
 
 export default function AppRoutes() {
@@ -91,6 +93,24 @@ export default function AppRoutes() {
                 element={
                     <PrivateRoute>
                         <CreateItem />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path="/create/transaction"
+                element={
+                    <PrivateRoute>
+                        <CreateTransaction />
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path="/manager/report"
+                element={
+                    <PrivateRoute>
+                        <ManagerReport />
                     </PrivateRoute>
                 }
             />
