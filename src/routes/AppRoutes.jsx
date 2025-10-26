@@ -53,7 +53,7 @@ export default function AppRoutes() {
             />
 
             <Route
-                path="/update/supplier"
+                path="/update/supplier/:id"
                 element={
                     <PrivateRoute>
                         <UpdateSupplier />

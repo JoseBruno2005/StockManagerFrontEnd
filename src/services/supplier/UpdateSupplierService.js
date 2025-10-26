@@ -6,7 +6,7 @@ export default async function UpdateSupplierService(supplierDTO, idSupplier) {
             nome: supplierDTO?.nome,
             telefone: supplierDTO?.telefone,
             email: supplierDTO?.email,
-            CNPJ: supplierDTO?.CNPJ
+            CNPJ: supplierDTO?.cnpj
         })
         
         return res;
