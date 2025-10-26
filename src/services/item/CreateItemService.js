@@ -1,6 +1,6 @@
 import { api } from "../Api";
 
-export default async function CreateItemService(factory, itemDTO) {
+export default async function CreateItemService(itemDTO) {
     try{
         const res = await api.post('/item/save',{
             nome: itemDTO.nome,
@@ -10,7 +10,7 @@ export default async function CreateItemService(factory, itemDTO) {
             fornecedorId: itemDTO.fornecedorId
         }, {
             params: {
-                factory
+                factory: itemDTO.factory
             }
         })
         

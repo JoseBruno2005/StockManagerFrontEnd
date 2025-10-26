@@ -3,18 +3,18 @@ import ListAllItemService from "../../services/item/ListAllItensService";
 import { useNavigate } from "react-router-dom";
 import DeleteItemService from "../../services/item/DeleteItemService";
 
-export default function ManagerItem(){
+export default function ManagerItem() {
 
     const [listItens, setListItens] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         const findAllItens = async () => {
-            try{
+            try {
                 const res = await ListAllItemService();
                 console.log(res.data);
                 setListItens(res.data);
-            }catch(error){
+            } catch (error) {
                 console.log(error);
             }
         }
@@ -22,10 +22,10 @@ export default function ManagerItem(){
     }, [])
 
     const handleDeleteItem = async (itemId) => {
-        try{
+        try {
             await DeleteItemService(itemId);
             setListItens(prevList => prevList.filter(item => item.id !== itemId));
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -34,26 +34,36 @@ export default function ManagerItem(){
         navigate(`/update/item/${itemId}`)
     }
 
-    return(
+    const handleCreateItem = () => {
+        navigate('/create/item')
+    }
+
+    return (
         <div>
             <h1>Gerenciar Item</h1>
+            <button onClick={handleCreateItem}>Criar item</button>
             {listItens ? (
                 <div>
-                    {listItens.map( (item) => (
+                    {listItens.map((item) => (
                         <div key={item.id}>
-                            <p>{item.foto}</p>
+                            <p>{item.categoria}</p>
+                            <img
+                                src={item.foto}
+                                alt={item.nome}
+                                className="w-20 h-20"
+                            />
                             <p>{item.nome}</p>
                             <p>{item.preco}</p>
                             <p>{item.quantidade}</p>
                             <p>{item.fornecedorId}</p>
                             <div>
-                                <button onClick={() => {handleDeleteItem(item.id)}}>Deletar Item</button>
-                                <button onClick={() => {handleUpdateItem(item.id)}}>Atualizar Item</button>
+                                <button onClick={() => { handleDeleteItem(item.id) }}>Deletar Item</button>
+                                <button onClick={() => { handleUpdateItem(item.id) }}>Atualizar Item</button>
                             </div>
                         </div>
                     ))}
                 </div>
-            ): (
+            ) : (
                 <div>
                     Nenhum item encontrado
                 </div>
