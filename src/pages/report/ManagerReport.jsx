@@ -172,11 +172,10 @@ export default function ManagerReport() {
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <span
-                                className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                                  t.tipoTransacao === "compra"
-                                    ? "bg-emerald-100 text-emerald-700"
-                                    : "bg-rose-100 text-rose-700"
-                                }`}
+                                className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${t.tipoTransacao === "compra"
+                                  ? "bg-emerald-100 text-emerald-700"
+                                  : "bg-rose-100 text-rose-700"
+                                  }`}
                               >
                                 {t.tipoTransacao}
                               </span>
@@ -198,39 +197,134 @@ export default function ManagerReport() {
 
                   <div className="mt-6 bg-slate-50 rounded-xl p-6 border border-slate-200">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                      <div className="flex items-center gap-2">
-                        <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                          />
-                        </svg>
-                        <p className="text-gray-700 font-medium">
-                          Total de transações: <span className="font-bold text-slate-700">{itemHistory.length}</span>
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <p className="text-gray-700 font-medium">
-                          Valor total:{" "}
-                          <span className="font-bold text-slate-700">
-                            {itemHistory
-                              .reduce((acc, t) => acc + t.valor, 0)
-                              .toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
-                          </span>
-                        </p>
+                      <div>
+
+
+                        <div className="flex flex-row">
+                          <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                              />
+                            </svg>
+                            <p className="text-gray-700 font-medium">
+                              Total de Compras:{" "}
+                              <span className="font-bold text-slate-700">
+                                {itemHistory.filter(t => t.tipoTransacao === "compra").length}
+                              </span>
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-2 ml-176">
+                            <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <p className="text-gray-700 font-medium">
+                              Valor total:{" "}
+                              <span className="font-bold text-slate-700">
+                                {itemHistory
+                                  .filter(t => t.tipoTransacao === "compra")
+                                  .reduce((acc, t) => acc + t.valor, 0)
+                                  .toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+
+
+
+                        <div className="flex flex-row">
+                          <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                              />
+                            </svg>
+                            <p className="text-gray-700 font-medium">
+                              Total de Vendas:{" "}
+                              <span className="font-bold text-slate-700">
+                                {itemHistory.filter(t => t.tipoTransacao === "venda").length}
+                              </span>
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-2 ml-180">
+                            <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <p className="text-gray-700 font-medium">
+                              Valor total:{" "}
+                              <span className="font-bold text-slate-700">
+                                {itemHistory
+                                  .filter(t => t.tipoTransacao === "venda")
+                                  .reduce((acc, t) => acc + t.valor, 0)
+                                  .toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+
+
+
+                        <div className="flex flex-row">
+                          <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                              />
+                            </svg>
+                            <p className="text-gray-700 font-medium">
+                              Total de Transações: <span className="font-bold text-slate-700">{itemHistory.length}</span>
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-2 ml-172">
+                            <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <p className="text-gray-700 font-medium">
+                              Valor total:{" "}
+                              <span className="font-bold text-slate-700">
+                                {itemHistory
+                                  .reduce((acc, t) => acc + t.valor, 0)
+                                  .toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>

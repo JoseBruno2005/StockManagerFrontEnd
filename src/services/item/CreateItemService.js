@@ -5,7 +5,6 @@ export default async function CreateItemService(itemDTO) {
         const res = await api.post('/item/save',{
             nome: itemDTO.nome,
             preco: itemDTO.preco,
-            quantidade: itemDTO.quantidade,
             foto: itemDTO.foto,
             fornecedorId: itemDTO.fornecedorId
         }, {

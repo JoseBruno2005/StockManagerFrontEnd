@@ -80,7 +80,7 @@ export default function CreateItem() {
 
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
           <Formik
-            initialValues={{ nome: "", factory: "", preco: 0, quantidade: 0, foto: "", fornecedorId: "" }}
+            initialValues={{ nome: "", factory: "", preco: 0, foto: "", fornecedorId: "" }}
             onSubmit={async (values) => {
               try {
                 setErrorMessage("")
@@ -129,15 +129,6 @@ export default function CreateItem() {
                       type="number"
                       name="preco"
                       step="0.01"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">Quantidade</label>
-                    <Field
-                      type="number"
-                      name="quantidade"
                       className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                     />
                   </div>

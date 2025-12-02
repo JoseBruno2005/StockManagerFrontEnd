@@ -87,7 +87,6 @@ export default function UpdateItem() {
                             initialValues={{
                                 nome: item.nome,
                                 preco: item.preco,
-                                quantidade: item.quantidade,
                                 foto: item.foto,
                             }}
                             onSubmit={async (values) => {
@@ -126,16 +125,6 @@ export default function UpdateItem() {
                                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                                             />
                                         </div>
-
-                                        <div>
-                                            <label className="block text-sm font-semibold text-slate-700 mb-2">Quantidade</label>
-                                            <Field
-                                                type="number"
-                                                name="quantidade"
-                                                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
-                                            />
-                                        </div>
-
                                         <div className="md:col-span-2">
                                             <label className="block text-sm font-semibold text-slate-700 mb-2">Foto do Produto</label>
                                             <div className="relative">

@@ -5,7 +5,6 @@ export default async function UpdateItemService(itemDTO, itemId) {
         const res = await api.put(`/item/${itemId}`, {
             nome: itemDTO?.nome,
             preco: itemDTO?.preco,
-            quantidade: itemDTO?.quantidade,
             foto: itemDTO?.foto,
             fornecedorId: itemDTO?.fornecedorId
         })
