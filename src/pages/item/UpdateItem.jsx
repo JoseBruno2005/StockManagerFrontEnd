@@ -113,8 +113,7 @@ export default function UpdateItem() {
                                             <Field
                                                 type="text"
                                                 name="nome"
-                                                disabled
-                                                className="w-full px-4 py-3 border border-slate-300 rounded-lg bg-slate-50 text-slate-600 cursor-not-allowed"
+                                                className="w-full px-4 py-3 border border-slate-300 rounded-lg bg-slate-50 text-slate-600"
                                             />
                                         </div>
 
