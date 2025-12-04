@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import ListAllItemService from "../../services/item/ListAllItensService"
 import ItemHistoryService from "../../services/report/itemHistoryService"
 import MonthlyReportService from "../../services/report/monthlyReportService"
+import jsPDF from "jspdf"
+import autoTable from "jspdf-autotable"
 
 export default function ManagerReport() {
   const [availableItems, setAvailableItems] = useState([])
@@ -20,6 +22,94 @@ export default function ManagerReport() {
     }
     findAllItems()
   }, [])
+
+  const generateItemHistoryPDF = () => {
+    if (itemHistory.length === 0) {
+      alert("Não há dados para gerar PDF");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("Relatório de Histórico de Itens", 14, 20);
+
+    const columns = ["ID", "Data", "Tipo", "Quantidade", "Valor"];
+    const rows = itemHistory.map((t) => [
+      t.id,
+      new Date(t.data).toLocaleString("pt-BR"),
+      t.tipoTransacao,
+      t.quantidade,
+      t.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }),
+    ]);
+
+    autoTable(doc, {
+      head: [columns],
+      body: rows,
+      startY: 30,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [100, 100, 100] },
+    });
+
+    const totalCompras = itemHistory
+      .filter((t) => t.tipoTransacao === "compra")
+      .reduce((acc, t) => acc + t.valor, 0);
+
+    const totalVendas = itemHistory
+      .filter((t) => t.tipoTransacao === "venda")
+      .reduce((acc, t) => acc + t.valor, 0);
+
+    const totalTransacoes = itemHistory.reduce((acc, t) => acc + t.valor, 0);
+
+    let finalY = doc.lastAutoTable.finalY + 10;
+
+    doc.setFontSize(12);
+    doc.text(`Total de Compras: ${itemHistory.filter(t => t.tipoTransacao === "compra").length}`, 14, finalY);
+    doc.text(`Valor total: ${totalCompras.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`, 80, finalY);
+
+    finalY += 7;
+    doc.text(`Total de Vendas: ${itemHistory.filter(t => t.tipoTransacao === "venda").length}`, 14, finalY);
+    doc.text(`Valor total: ${totalVendas.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`, 80, finalY);
+
+    finalY += 7;
+    doc.text(`Total de Transações: ${itemHistory.length}`, 14, finalY);
+    doc.text(`Valor total: ${totalTransacoes.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`, 80, finalY);
+
+    doc.save("historico_itens.pdf");
+  };
+
+  const generateMonthlyReportPDF = () => {
+    if (monthlyReport.length === 0) {
+      alert("Não há dados para gerar PDF");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("Relatório Mensal de Itens", 14, 20);
+
+    const columns = ["ID", "Item", "Entradas", "Saídas", "Qtd. Atual"];
+    const rows = monthlyReport.map((r) => [
+      r.itemId,
+      r.nomeItem,
+      r.totalEntradas,
+      r.totalSaidas,
+      r.quantidadeAtual,
+    ]);
+
+    autoTable(doc, {
+      head: [columns],
+      body: rows,
+      startY: 30,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [100, 100, 100] },
+    });
+
+    let finalY = doc.lastAutoTable.finalY + 10;
+    doc.setFontSize(12);
+    doc.text(`Total de Itens no Relatório: ${monthlyReport.length}`, 14, finalY);
+
+    doc.save("relatorio_mensal.pdf");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100">
@@ -119,6 +209,15 @@ export default function ManagerReport() {
                   >
                     Gerar Histórico
                   </button>
+                  <div className="mt-4 flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={generateItemHistoryPDF}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors"
+                    >
+                      Exportar Histórico PDF
+                    </button>
+                  </div>
                 </Form>
               </Formik>
 
@@ -328,7 +427,9 @@ export default function ManagerReport() {
                       </div>
                     </div>
                   </div>
+
                 </div>
+
               )}
             </div>
           </div>
@@ -398,6 +499,15 @@ export default function ManagerReport() {
                   >
                     Gerar Relatório
                   </button>
+                  <div className="mt-4 flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={generateMonthlyReportPDF}
+                      className="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition-colors"
+                    >
+                      Exportar Relatório Mensal PDF
+                    </button>
+                  </div>
                 </Form>
               </Formik>
 
