@@ -98,10 +98,6 @@ export default function ManagerItem() {
                         {item.quantidade} un.
                       </span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-slate-600">Fornecedor ID:</span>
-                      <span className="text-sm font-medium text-slate-700">#{item.fornecedorId}</span>
-                    </div>
                   </div>
 
 
